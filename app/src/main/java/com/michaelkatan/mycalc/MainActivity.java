@@ -1,12 +1,15 @@
 package com.michaelkatan.mycalc;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends Activity
+public class MainActivity extends Activity implements View.OnClickListener
 {
     int a;
     int b;
@@ -15,12 +18,20 @@ public class MainActivity extends Activity
     TextView resultView;
 
     @Override
+    public void onClick(View view)
+    {
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        LinearLayout layout = findViewById(R.id.myLayout);
         final TextView resultView = findViewById(R.id.Result_tv);
+
         Button b1 = findViewById(R.id.btn_1);
         Button b2 = findViewById(R.id.btn_2);
         Button b3 = findViewById(R.id.btn_3);
@@ -49,80 +60,24 @@ public class MainActivity extends Activity
             }
         });
 
-        b1.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                String temp = "";
-                resultView.setText(resultView.getText() + "1");
 
-            }
-        });
+        b1.setOnClickListener(new myOnClick());
 
-        b2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String temp = "";
-                resultView.setText(resultView.getText()+"2");
-            }
-        });
+        b2.setOnClickListener(new myOnClick());
 
-        b3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String temp = "";
-                resultView.setText(resultView.getText()+"3");
-            }
-        });
+        b3.setOnClickListener(new myOnClick());
 
-        b4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String temp = "";
-                resultView.setText(resultView.getText()+"4");
-            }
-        });
+        b4.setOnClickListener(new myOnClick());
 
-        b5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String temp = "";
-                resultView.setText(resultView.getText()+"5");
-            }
-        });
+        b5.setOnClickListener(new myOnClick());
 
-        b6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String temp = "";
-                resultView.setText(resultView.getText()+"6");
-            }
-        });
+        b6.setOnClickListener(new myOnClick());
 
-        b7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String temp = "";
-                resultView.setText(resultView.getText()+"7");
-            }
-        });
+        b7.setOnClickListener(new myOnClick());
 
-        b8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String temp = "";
-                resultView.setText(resultView.getText()+"8");
-            }
-        });
+        b8.setOnClickListener(new myOnClick());
 
-        b9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String temp = "";
-                resultView.setText(resultView.getText()+"9");
-            }
-        });
+        b9.setOnClickListener(new myOnClick());
 
 
         bPlus.setOnClickListener(new View.OnClickListener()
@@ -166,5 +121,23 @@ public class MainActivity extends Activity
             }
         });
 
+
+
+    }
+
+    public class myOnClick implements View.OnClickListener
+    {
+
+        TextView tv;
+        @Override
+        public void onClick(View view)
+        {
+            tv = findViewById(R.id.Result_tv);
+            Button b = (Button) view;
+            String temp = tv.getText().toString();
+            String temp1 = b.getText().toString();
+            //resultView.setText(temp + ""+b.getText().toString());
+           tv.setText(tv.getText().toString()+b.getText().toString());
+        }
     }
 }
