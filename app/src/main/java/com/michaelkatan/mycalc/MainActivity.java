@@ -3,25 +3,21 @@ package com.michaelkatan.mycalc;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity implements View.OnClickListener
+public class MainActivity extends Activity
 {
     int a;
     int b;
     int result;
     boolean Plus = true;
     TextView resultView;
-
-    @Override
-    public void onClick(View view)
-    {
-
-    }
+    CountDownTimer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -29,7 +25,7 @@ public class MainActivity extends Activity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LinearLayout layout = findViewById(R.id.myLayout);
+        final LinearLayout layout = findViewById(R.id.myLayout);
         final TextView resultView = findViewById(R.id.Result_tv);
 
         Button b1 = findViewById(R.id.btn_1);
@@ -47,36 +43,41 @@ public class MainActivity extends Activity implements View.OnClickListener
         Button bEqual = findViewById(R.id.btn_equal);
 
 
-        resultView.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                resultView.setText("");
-                a = 0;
-                b = 0;
-                result = 0;
 
+        timer = new CountDownTimer(1000000,1000)
+        {
+
+            @Override
+            public void onTick(long l)
+            {
+                int r = (int) (Math.random()*100);
+                int g = (int) (Math.random()*100);
+                int b = (int) (Math.random()*100);
+                layout.setBackgroundColor(Color.rgb(r,g,b));
             }
-        });
+
+            @Override
+            public void onFinish()
+            {
+                layout.setBackgroundColor(100);
+            }
+        };
+
+
+        timer.start();
+
+
+
 
 
         b1.setOnClickListener(new myOnClick());
-
         b2.setOnClickListener(new myOnClick());
-
         b3.setOnClickListener(new myOnClick());
-
         b4.setOnClickListener(new myOnClick());
-
         b5.setOnClickListener(new myOnClick());
-
         b6.setOnClickListener(new myOnClick());
-
         b7.setOnClickListener(new myOnClick());
-
         b8.setOnClickListener(new myOnClick());
-
         b9.setOnClickListener(new myOnClick());
 
 
@@ -118,6 +119,19 @@ public class MainActivity extends Activity implements View.OnClickListener
                 }
 
                 resultView.setText(result + "");
+            }
+        });
+
+        resultView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                resultView.setText("");
+                a = 0;
+                b = 0;
+                result = 0;
+
             }
         });
 
